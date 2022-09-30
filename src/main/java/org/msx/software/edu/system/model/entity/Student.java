@@ -3,9 +3,11 @@ package org.msx.software.edu.system.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.msx.software.edu.system.model.entity.util.*;
+import org.msx.software.edu.system.model.entity.util.master.BaseEntity;
+import org.msx.software.edu.system.model.entity.util.codes.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Period;
@@ -21,7 +23,7 @@ import java.util.List;
         uniqueConstraints =
                 {@UniqueConstraint(name = ConstraintName.EMAIL_UNIQUE, columnNames = FieldName.EMAIL),
                         @UniqueConstraint(name = ConstraintName.CODE_UNIQUE, columnNames = FieldName.CODE)})
-public class Student extends MasterEntity {
+public class Student extends BaseEntity {
 
     /* 1 */
     @Column(name = FieldName.CODE, columnDefinition = ColumnDefinitionType.VARCHAR_2_50, nullable = false)

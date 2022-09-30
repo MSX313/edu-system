@@ -3,9 +3,14 @@ package org.msx.software.edu.system.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.msx.software.edu.system.model.entity.util.*;
+import org.msx.software.edu.system.model.entity.util.master.BaseEntity;
+import org.msx.software.edu.system.model.entity.util.codes.ColumnDefinitionType;
+import org.msx.software.edu.system.model.entity.util.codes.EntityName;
+import org.msx.software.edu.system.model.entity.util.codes.FieldName;
+import org.msx.software.edu.system.model.entity.util.codes.TableName;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.sql.Timestamp;
 
 @NoArgsConstructor
@@ -14,7 +19,7 @@ import java.sql.Timestamp;
 
 @Entity(name = EntityName.BOOK)
 @Table(name = TableName.BOOK)
-public class Book extends MasterEntity {
+public class Book  extends BaseEntity {
 
     /* 1 */
     @Column(name = FieldName.NAME, nullable = false)

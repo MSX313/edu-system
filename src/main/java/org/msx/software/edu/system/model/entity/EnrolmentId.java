@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.msx.software.edu.system.model.entity.util.ColumnDefinitionType;
-import org.msx.software.edu.system.model.entity.util.FieldName;
+import org.msx.software.edu.system.model.entity.util.codes.ColumnDefinitionType;
+import org.msx.software.edu.system.model.entity.util.codes.FieldName;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
-import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor

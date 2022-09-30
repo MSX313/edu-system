@@ -3,19 +3,20 @@ package org.msx.software.edu.system.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.msx.software.edu.system.model.entity.util.*;
+import org.msx.software.edu.system.model.entity.util.master.BaseEntity;
+import org.msx.software.edu.system.model.entity.util.codes.*;
 
+import javax.persistence.Entity;
 import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
 @Setter
-
 @Entity(name = EntityName.STUDENT_ID_CARD)
 @Table(name = TableName.STUDENT_ID_CARD,
         uniqueConstraints =
                 {@UniqueConstraint(name = ConstraintName.CARD_NUMBER_UNIQUE, columnNames = FieldName.CARD_NUMBER)})
-public class StudentIdCard extends MasterEntity {
+public class StudentIdCard extends BaseEntity {
 
     /* 1 */
     @Column(name = FieldName.CARD_NUMBER, columnDefinition = ColumnDefinitionType.VARCHAR_2_15)

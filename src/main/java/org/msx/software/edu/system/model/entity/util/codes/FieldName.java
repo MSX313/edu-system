@@ -1,13 +1,19 @@
-package org.msx.software.edu.system.model.entity.util;
+package org.msx.software.edu.system.model.entity.util.codes;
 
 public interface FieldName {
 
-    String INSERT_TIME = "C_INSERT_TIME";
-    String UPDATE_TIME = "C_UPDATE_TIME";
-    String VERSION = "C_VERSION";
+    // General
     String ID = "C_ID";
+    String INSERT_USER = "C_INSERT_USER";
+    String UPDATE_USER = "C_UPDATE_USER";
+    String INSERT_DATE_TIME = "C_INSERT_DATE_TIME";
+    String UPDATE_DATE_TIME = "C_UPDATE_DATE_TIME";
+    String VERSION = "C_VERSION";
+    String IS_ACTIVE = "C_IS_ACTIVE";
+    //
     String UUID = "C_UUID";
     String CODE = "C_CODE";
+    String VALUE = "C_VALUE";
     String FIRST_NAME = "C_FIRST_NAME";
     String LAST_NAME = "C_LAST_NAME";
     String EMAIL = "C_EMAIL";
@@ -20,6 +26,8 @@ public interface FieldName {
 
     // Student
     String STUDENT_ID = "C_STUDENT_ID";
+    String CATEGORY="F_CATEGORY";
+    String CATEGORY_CATEGORY_ELEMENT_ID_FOREIGN_KEY = "C_CTG_CTGE_ID_FK";
     String STUDENT_CARD_ID_FOREIGN_KEY = "C_ST_CD_ID_FK";
     String STUDENT_BOOK_ID_FOREIGN_KEY = "C_ST_BK_ID_FK";
     String STUDENT_ENROLMENT_ID_FOREIGN_KEY = "C_ST_EN_ID_FK";

@@ -3,12 +3,14 @@ package org.msx.software.edu.system.model.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.msx.software.edu.system.model.entity.util.ColumnDefinitionType;
-import org.msx.software.edu.system.model.entity.util.EntityName;
-import org.msx.software.edu.system.model.entity.util.FieldName;
-import org.msx.software.edu.system.model.entity.util.TableName;
+import org.msx.software.edu.system.model.entity.util.codes.ColumnDefinitionType;
+import org.msx.software.edu.system.model.entity.util.codes.EntityName;
+import org.msx.software.edu.system.model.entity.util.codes.FieldName;
+import org.msx.software.edu.system.model.entity.util.codes.TableName;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -45,17 +47,30 @@ public class Enrolment {
     @Column(name = FieldName.CREATED_AT, columnDefinition = ColumnDefinitionType.TIME_STAMP)
     private Timestamp createdAt;
     /* 5 */
-    @CreationTimestamp
-    @Column(name = FieldName.INSERT_TIME)
-    private Timestamp insertTime;
+    @CreatedBy
+    @Column(name = FieldName.INSERT_USER, columnDefinition = ColumnDefinitionType.VARCHAR_2_50)
+    private String insertUser;
     /* 6 */
-    @UpdateTimestamp
-    @Column(name = FieldName.UPDATE_TIME)
-    private Timestamp updateTime;
+    @LastModifiedBy
+    @Column(name = FieldName.UPDATE_USER, columnDefinition = ColumnDefinitionType.VARCHAR_2_50)
+    private String updateUser;
     /* 7 */
+    @CreatedDate
+    /*@CreationTimestamp*/
+    @Column(name = FieldName.INSERT_DATE_TIME)
+    private Timestamp insertDateTime;
+    /* 8 */
+    @LastModifiedDate
+    /*@UpdateTimestamp*/
+    @Column(name = FieldName.UPDATE_DATE_TIME)
+    private Timestamp updateDateTime;
+    /* 9 */
     @Version
     @Column(name = FieldName.VERSION)
-    private Long version;
+    private Integer version;
+    /* 10 */
+    @Column(name = FieldName.IS_ACTIVE, nullable = false)
+    private boolean activeState = true;
 
     public Enrolment(EnrolmentId enrolmentId, Student student, Course course, Timestamp createdAt) {
         this.enrolmentId = enrolmentId;

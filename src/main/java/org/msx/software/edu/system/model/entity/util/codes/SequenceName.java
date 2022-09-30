@@ -1,8 +1,8 @@
-package org.msx.software.edu.system.model.entity.util;
+package org.msx.software.edu.system.model.entity.util.codes;
 
 public interface SequenceName {
 
-    String MASTER_ENTITY = "MASTER_ENTITY_SEQ";
+    String BASIC_ENTITY = "BASIC_ENTITY_SEQ";
     String STUDENT = "STUDENT_SEQ";
     String STUDENT_ID_CARD = "STUDENT_ID_CARD_SEQ";
     String COURSE = "COURSE_SEQ";

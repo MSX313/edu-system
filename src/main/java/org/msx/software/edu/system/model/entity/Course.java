@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-import org.msx.software.edu.system.model.entity.util.*;
+import org.msx.software.edu.system.model.entity.util.master.BaseEntity;
+import org.msx.software.edu.system.model.entity.util.codes.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,7 +19,7 @@ import java.util.UUID;
 
 @Entity(name = EntityName.COURSE)
 @Table(name = TableName.COURSE)
-public class Course extends MasterEntity {
+public class Course extends BaseEntity {
 
     @Column(name = FieldName.NAME, columnDefinition = ColumnDefinitionType.VARCHAR_2_50, nullable = false)
     /* 1 */
