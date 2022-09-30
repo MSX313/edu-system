@@ -1,0 +1,746 @@
+2022-09-30 14:45:52.029  INFO 16160 --- [restartedMain] org.msx.software.edu.system.Application  : Starting Application using Java 18.0.2.1 on DESKTOP-OMF22FF with PID 16160 (D:\Projects\001\edu.system\edu.system\target\classes started by MSX in D:\Projects\001\edu.system\edu.system)
+2022-09-30 14:45:52.033  INFO 16160 --- [restartedMain] org.msx.software.edu.system.Application  : No active profile set, falling back to 1 default profile: "default"
+2022-09-30 14:45:53.968  INFO 16160 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-09-30 14:45:53.968  INFO 16160 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-09-30 14:45:54.124  INFO 16160 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-09-30 14:45:54.298  INFO 16160 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-09-30 14:45:54.301  WARN 16160 --- [restartedMain] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2022-09-30 14:45:54.706  INFO 16160 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-09-30 14:45:55.901 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_book cascade constraints
+2022-09-30 14:45:56.194 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_course cascade constraints
+2022-09-30 14:45:56.217 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_enrolment cascade constraints
+2022-09-30 14:45:56.238 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_student cascade constraints
+2022-09-30 14:45:56.274 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_student_id_card cascade constraints
+2022-09-30 14:45:56.301 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop sequence master_entity_seq
+2022-09-30 14:45:56.330 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : create sequence master_entity_seq start with 1 increment by  1
+2022-09-30 14:45:56.339 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    create table t_edu_book (
+       c_id NUMBER not null,
+        c_insert_time timestamp,
+        c_update_time timestamp,
+        c_version number(19,0),
+        c_created_at TIMESTAMP,
+        c_name varchar2(255 char) not null,
+        c_student_id NUMBER not null,
+        primary key (c_id)
+    )
+2022-09-30 14:45:56.363 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    create table t_edu_course (
+       c_id NUMBER not null,
+        c_insert_time timestamp,
+        c_update_time timestamp,
+        c_version number(19,0),
+        c_department VARCHAR2(50) not null,
+        c_name VARCHAR2(50) not null,
+        primary key (c_id)
+    )
+2022-09-30 14:45:56.371 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    create table t_edu_enrolment (
+       c_course_id NUMBER not null,
+        c_student_id NUMBER not null,
+        c_created_at TIMESTAMP,
+        c_insert_time timestamp,
+        c_update_time timestamp,
+        c_version number(19,0),
+        primary key (c_course_id, c_student_id)
+    )
+2022-09-30 14:45:56.380 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    create table t_edu_student (
+       c_id NUMBER not null,
+        c_insert_time timestamp,
+        c_update_time timestamp,
+        c_version number(19,0),
+        c_code VARCHAR2(50) not null,
+        c_date_of_birth TIMESTAMP not null,
+        c_email VARCHAR2(50) not null,
+        c_first_name VARCHAR2(50) not null,
+        c_last_name VARCHAR2(50) not null,
+        primary key (c_id)
+    )
+2022-09-30 14:45:56.393 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    create table t_edu_student_id_card (
+       c_id NUMBER not null,
+        c_insert_time timestamp,
+        c_update_time timestamp,
+        c_version number(19,0),
+        c_card_number VARCHAR2(15),
+        c_student_id NUMBER not null,
+        primary key (c_id)
+    )
+2022-09-30 14:45:56.401 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_student 
+       add constraint email_unique unique (c_email)
+2022-09-30 14:45:56.418 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_student 
+       add constraint code_unique unique (c_code)
+2022-09-30 14:45:56.425 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_student_id_card 
+       add constraint UK_gjjv2g2j4s9x5rmsdhw1gk7fw unique (c_student_id)
+2022-09-30 14:45:56.433 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_student_id_card 
+       add constraint card_number_unique unique (c_card_number)
+2022-09-30 14:45:56.440 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_book 
+       add constraint C_ST_BK_ID_FK 
+       foreign key (c_student_id) 
+       references t_edu_student
+2022-09-30 14:45:56.453 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_enrolment 
+       add constraint C_COURSE_ID_FK 
+       foreign key (c_course_id) 
+       references t_edu_course
+2022-09-30 14:45:56.461 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_enrolment 
+       add constraint C_ST_EN_ID_FK 
+       foreign key (c_student_id) 
+       references t_edu_student
+2022-09-30 14:45:56.468 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_student_id_card 
+       add constraint C_ST_CD_ID_FK 
+       foreign key (c_student_id) 
+       references t_edu_student
+2022-09-30 14:45:58.131  INFO 16160 --- [restartedMain] org.msx.software.edu.system.Application  : Started Application in 6.662 seconds (JVM running for 8.315)
+2022-09-30 14:45:58.238 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 14:45:58.272 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 14:45:58.273 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 14:45:58.274 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 14:45:58.274 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 14:45:58.286 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_student
+        (c_insert_time, c_update_time, c_version, c_code, c_date_of_birth, c_email, c_first_name, c_last_name, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+2022-09-30 14:45:58.392 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_book
+        (c_insert_time, c_update_time, c_version, c_created_at, c_name, c_student_id, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2022-09-30 14:45:58.426 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_book
+        (c_insert_time, c_update_time, c_version, c_created_at, c_name, c_student_id, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2022-09-30 14:45:58.428 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_book
+        (c_insert_time, c_update_time, c_version, c_created_at, c_name, c_student_id, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2022-09-30 14:45:58.429 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_student_id_card
+        (c_insert_time, c_update_time, c_version, c_card_number, c_student_id, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2022-09-30 14:45:58.492 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 14:45:58.494 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 14:45:58.494 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 14:45:58.496 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_course
+        (c_insert_time, c_update_time, c_version, c_department, c_name, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2022-09-30 14:45:58.504 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_course
+        (c_insert_time, c_update_time, c_version, c_department, c_name, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2022-09-30 14:45:58.505 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_course
+        (c_insert_time, c_update_time, c_version, c_department, c_name, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2022-09-30 14:45:58.518 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        student0_.c_id as c_id1_3_0_,
+        student0_.c_insert_time as c_insert_time2_3_0_,
+        student0_.c_update_time as c_update_time3_3_0_,
+        student0_.c_version as c_version4_3_0_,
+        student0_.c_code as c_code5_3_0_,
+        student0_.c_date_of_birth as c_date_of_birth6_3_0_,
+        student0_.c_email as c_email7_3_0_,
+        student0_.c_first_name as c_first_name8_3_0_,
+        student0_.c_last_name as c_last_name9_3_0_ 
+    from
+        t_edu_student student0_ 
+    where
+        student0_.c_id=?
+2022-09-30 14:45:58.533 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        studentidc0_.c_id as c_id1_4_0_,
+        studentidc0_.c_insert_time as c_insert_time2_4_0_,
+        studentidc0_.c_update_time as c_update_time3_4_0_,
+        studentidc0_.c_version as c_version4_4_0_,
+        studentidc0_.c_card_number as c_card_number5_4_0_,
+        studentidc0_.c_student_id as c_student_id6_4_0_ 
+    from
+        t_edu_student_id_card studentidc0_ 
+    where
+        studentidc0_.c_student_id=?
+2022-09-30 14:45:58.539 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        booklist0_.c_student_id as c_student_id7_0_0_,
+        booklist0_.c_id as c_id1_0_0_,
+        booklist0_.c_id as c_id1_0_1_,
+        booklist0_.c_insert_time as c_insert_time2_0_1_,
+        booklist0_.c_update_time as c_update_time3_0_1_,
+        booklist0_.c_version as c_version4_0_1_,
+        booklist0_.c_created_at as c_created_at5_0_1_,
+        booklist0_.c_name as c_name6_0_1_,
+        booklist0_.c_student_id as c_student_id7_0_1_ 
+    from
+        t_edu_book booklist0_ 
+    where
+        booklist0_.c_student_id=?
+2022-09-30 14:45:58.552 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        enrolmentl0_.c_student_id as c_student_id2_2_0_,
+        enrolmentl0_.c_course_id as c_course_id1_2_0_,
+        enrolmentl0_.c_course_id as c_course_id1_2_1_,
+        enrolmentl0_.c_student_id as c_student_id2_2_1_,
+        enrolmentl0_.c_created_at as c_created_at3_2_1_,
+        enrolmentl0_.c_insert_time as c_insert_time4_2_1_,
+        enrolmentl0_.c_update_time as c_update_time5_2_1_,
+        enrolmentl0_.c_version as c_version6_2_1_,
+        course1_.c_id as c_id1_1_2_,
+        course1_.c_insert_time as c_insert_time2_1_2_,
+        course1_.c_update_time as c_update_time3_1_2_,
+        course1_.c_version as c_version4_1_2_,
+        course1_.c_department as c_department5_1_2_,
+        course1_.c_name as c_name6_1_2_ 
+    from
+        t_edu_enrolment enrolmentl0_ 
+    inner join
+        t_edu_course course1_ 
+            on enrolmentl0_.c_course_id=course1_.c_id 
+    where
+        enrolmentl0_.c_student_id=?
+2022-09-30 14:45:58.604 ERROR 16160 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:774) ~[spring-boot-2.7.3.jar:2.7.3]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:755) ~[spring-boot-2.7.3.jar:2.7.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.7.3.jar:2.7.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-2.7.3.jar:2.7.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-2.7.3.jar:2.7.3]
+	at org.msx.software.edu.system.Application.main(Application.java:27) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.7.3.jar:2.7.3]
+Caused by: org.springframework.orm.jpa.JpaSystemException: null id generated for:class org.msx.software.edu.system.model.entity.Enrolment; nested exception is org.hibernate.id.IdentifierGenerationException: null id generated for:class org.msx.software.edu.system.model.entity.Enrolment
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:331) ~[spring-orm-5.3.22.jar:5.3.22]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:233) ~[spring-orm-5.3.22.jar:5.3.22]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566) ~[spring-orm-5.3.22.jar:5.3.22]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:743) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:711) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:654) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:407) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.22.jar:5.3.22]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.22.jar:5.3.22]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:174) ~[spring-data-jpa-2.7.2.jar:2.7.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.22.jar:5.3.22]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-5.3.22.jar:5.3.22]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.22.jar:5.3.22]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215) ~[spring-aop-5.3.22.jar:5.3.22]
+	at jdk.proxy3/jdk.proxy3.$Proxy133.save(Unknown Source) ~[na:na]
+	at org.msx.software.edu.system.Application.lambda$commandLineRunner$3(Application.java:87) ~[classes/:na]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:771) ~[spring-boot-2.7.3.jar:2.7.3]
+	... 8 common frames omitted
+Caused by: org.hibernate.id.IdentifierGenerationException: null id generated for:class org.msx.software.edu.system.model.entity.Enrolment
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:117) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:185) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:128) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:118) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.internal.SessionImpl.persistOnFlush(SessionImpl.java:801) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.spi.CascadingActions$8.cascade(CascadingActions.java:341) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeToOne(Cascade.java:510) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:434) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:220) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeCollectionElements(Cascade.java:543) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeCollection(Cascade.java:474) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:437) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:220) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:153) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.cascadeOnFlush(AbstractFlushingEventListener.java:159) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:149) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:82) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:39) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:107) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1407) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:489) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3290) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2425) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:449) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:183) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$300(JdbcResourceLocalTransactionCoordinatorImpl.java:40) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:281) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562) ~[spring-orm-5.3.22.jar:5.3.22]
+	... 24 common frames omitted
+
+2022-09-30 14:45:58.653 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_book cascade constraints
+2022-09-30 14:45:58.882 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_course cascade constraints
+2022-09-30 14:45:58.910 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_enrolment cascade constraints
+2022-09-30 14:45:58.931 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_student cascade constraints
+2022-09-30 14:45:58.970 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_student_id_card cascade constraints
+2022-09-30 14:45:59.000 DEBUG 16160 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop sequence master_entity_seq
+2022-09-30 14:45:59.032  INFO 16160 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-09-30 14:45:59.041  INFO 16160 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-09-30 15:35:38.105  INFO 25248 --- [restartedMain] org.msx.software.edu.system.Application  : Starting Application using Java 18.0.2.1 on DESKTOP-OMF22FF with PID 25248 (D:\Projects\001\edu.system\edu.system\target\classes started by MSX in D:\Projects\001\edu.system\edu.system)
+2022-09-30 15:35:38.107  INFO 25248 --- [restartedMain] org.msx.software.edu.system.Application  : No active profile set, falling back to 1 default profile: "default"
+2022-09-30 15:35:39.635  INFO 25248 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-09-30 15:35:39.635  INFO 25248 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2022-09-30 15:35:39.779  INFO 25248 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-09-30 15:35:39.932  INFO 25248 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-09-30 15:35:39.934  WARN 25248 --- [restartedMain] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=oracle.jdbc.driver.OracleDriver was not found, trying direct instantiation.
+2022-09-30 15:35:40.131  INFO 25248 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-09-30 15:35:41.183 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_book cascade constraints
+2022-09-30 15:35:41.216 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_course cascade constraints
+2022-09-30 15:35:41.218 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_enrolment cascade constraints
+2022-09-30 15:35:41.219 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_student cascade constraints
+2022-09-30 15:35:41.221 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_student_id_card cascade constraints
+2022-09-30 15:35:41.223 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop sequence master_entity_seq
+2022-09-30 15:35:41.226 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : create sequence master_entity_seq start with 1 increment by  1
+2022-09-30 15:35:41.235 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    create table t_edu_book (
+       c_id NUMBER not null,
+        c_insert_time timestamp,
+        c_update_time timestamp,
+        c_version number(19,0),
+        c_created_at TIMESTAMP,
+        c_name varchar2(255 char) not null,
+        c_student_id NUMBER not null,
+        primary key (c_id)
+    )
+2022-09-30 15:35:41.257 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    create table t_edu_course (
+       c_id NUMBER not null,
+        c_insert_time timestamp,
+        c_update_time timestamp,
+        c_version number(19,0),
+        c_department VARCHAR2(50) not null,
+        c_name VARCHAR2(50) not null,
+        primary key (c_id)
+    )
+2022-09-30 15:35:41.264 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    create table t_edu_enrolment (
+       c_course_id NUMBER not null,
+        c_student_id NUMBER not null,
+        c_created_at TIMESTAMP,
+        c_insert_time timestamp,
+        c_update_time timestamp,
+        c_version number(19,0),
+        primary key (c_course_id, c_student_id)
+    )
+2022-09-30 15:35:41.271 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    create table t_edu_student (
+       c_id NUMBER not null,
+        c_insert_time timestamp,
+        c_update_time timestamp,
+        c_version number(19,0),
+        c_code VARCHAR2(50) not null,
+        c_date_of_birth TIMESTAMP not null,
+        c_email VARCHAR2(50) not null,
+        c_first_name VARCHAR2(50) not null,
+        c_last_name VARCHAR2(50) not null,
+        primary key (c_id)
+    )
+2022-09-30 15:35:41.281 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    create table t_edu_student_id_card (
+       c_id NUMBER not null,
+        c_insert_time timestamp,
+        c_update_time timestamp,
+        c_version number(19,0),
+        c_card_number VARCHAR2(15),
+        c_student_id NUMBER not null,
+        primary key (c_id)
+    )
+2022-09-30 15:35:41.288 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_student 
+       add constraint email_unique unique (c_email)
+2022-09-30 15:35:41.298 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_student 
+       add constraint code_unique unique (c_code)
+2022-09-30 15:35:41.306 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_student_id_card 
+       add constraint UK_gjjv2g2j4s9x5rmsdhw1gk7fw unique (c_student_id)
+2022-09-30 15:35:41.313 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_student_id_card 
+       add constraint card_number_unique unique (c_card_number)
+2022-09-30 15:35:41.320 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_book 
+       add constraint C_ST_BK_ID_FK 
+       foreign key (c_student_id) 
+       references t_edu_student
+2022-09-30 15:35:41.330 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_enrolment 
+       add constraint C_COURSE_ID_FK 
+       foreign key (c_course_id) 
+       references t_edu_course
+2022-09-30 15:35:41.337 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_enrolment 
+       add constraint C_ST_EN_ID_FK 
+       foreign key (c_student_id) 
+       references t_edu_student
+2022-09-30 15:35:41.343 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table t_edu_student_id_card 
+       add constraint C_ST_CD_ID_FK 
+       foreign key (c_student_id) 
+       references t_edu_student
+2022-09-30 15:35:43.060  INFO 25248 --- [restartedMain] org.msx.software.edu.system.Application  : Started Application in 5.343 seconds (JVM running for 6.29)
+2022-09-30 15:35:43.163 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 15:35:43.203 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 15:35:43.205 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 15:35:43.205 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 15:35:43.206 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 15:35:43.219 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_student
+        (c_insert_time, c_update_time, c_version, c_code, c_date_of_birth, c_email, c_first_name, c_last_name, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+2022-09-30 15:35:43.343 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_book
+        (c_insert_time, c_update_time, c_version, c_created_at, c_name, c_student_id, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2022-09-30 15:35:43.368 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_book
+        (c_insert_time, c_update_time, c_version, c_created_at, c_name, c_student_id, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2022-09-30 15:35:43.369 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_book
+        (c_insert_time, c_update_time, c_version, c_created_at, c_name, c_student_id, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2022-09-30 15:35:43.370 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_student_id_card
+        (c_insert_time, c_update_time, c_version, c_card_number, c_student_id, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2022-09-30 15:35:43.417 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 15:35:43.418 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 15:35:43.419 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        master_entity_seq.nextval 
+    from
+        dual
+2022-09-30 15:35:43.420 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_course
+        (c_insert_time, c_update_time, c_version, c_department, c_name, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2022-09-30 15:35:43.442 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_course
+        (c_insert_time, c_update_time, c_version, c_department, c_name, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2022-09-30 15:35:43.443 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    insert 
+    into
+        t_edu_course
+        (c_insert_time, c_update_time, c_version, c_department, c_name, c_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2022-09-30 15:35:43.457 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        student0_.c_id as c_id1_3_0_,
+        student0_.c_insert_time as c_insert_time2_3_0_,
+        student0_.c_update_time as c_update_time3_3_0_,
+        student0_.c_version as c_version4_3_0_,
+        student0_.c_code as c_code5_3_0_,
+        student0_.c_date_of_birth as c_date_of_birth6_3_0_,
+        student0_.c_email as c_email7_3_0_,
+        student0_.c_first_name as c_first_name8_3_0_,
+        student0_.c_last_name as c_last_name9_3_0_ 
+    from
+        t_edu_student student0_ 
+    where
+        student0_.c_id=?
+2022-09-30 15:35:43.470 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        studentidc0_.c_id as c_id1_4_0_,
+        studentidc0_.c_insert_time as c_insert_time2_4_0_,
+        studentidc0_.c_update_time as c_update_time3_4_0_,
+        studentidc0_.c_version as c_version4_4_0_,
+        studentidc0_.c_card_number as c_card_number5_4_0_,
+        studentidc0_.c_student_id as c_student_id6_4_0_ 
+    from
+        t_edu_student_id_card studentidc0_ 
+    where
+        studentidc0_.c_student_id=?
+2022-09-30 15:35:43.476 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        booklist0_.c_student_id as c_student_id7_0_0_,
+        booklist0_.c_id as c_id1_0_0_,
+        booklist0_.c_id as c_id1_0_1_,
+        booklist0_.c_insert_time as c_insert_time2_0_1_,
+        booklist0_.c_update_time as c_update_time3_0_1_,
+        booklist0_.c_version as c_version4_0_1_,
+        booklist0_.c_created_at as c_created_at5_0_1_,
+        booklist0_.c_name as c_name6_0_1_,
+        booklist0_.c_student_id as c_student_id7_0_1_ 
+    from
+        t_edu_book booklist0_ 
+    where
+        booklist0_.c_student_id=?
+2022-09-30 15:35:43.485 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    select
+        enrolmentl0_.c_student_id as c_student_id2_2_0_,
+        enrolmentl0_.c_course_id as c_course_id1_2_0_,
+        enrolmentl0_.c_course_id as c_course_id1_2_1_,
+        enrolmentl0_.c_student_id as c_student_id2_2_1_,
+        enrolmentl0_.c_created_at as c_created_at3_2_1_,
+        enrolmentl0_.c_insert_time as c_insert_time4_2_1_,
+        enrolmentl0_.c_update_time as c_update_time5_2_1_,
+        enrolmentl0_.c_version as c_version6_2_1_,
+        course1_.c_id as c_id1_1_2_,
+        course1_.c_insert_time as c_insert_time2_1_2_,
+        course1_.c_update_time as c_update_time3_1_2_,
+        course1_.c_version as c_version4_1_2_,
+        course1_.c_department as c_department5_1_2_,
+        course1_.c_name as c_name6_1_2_ 
+    from
+        t_edu_enrolment enrolmentl0_ 
+    inner join
+        t_edu_course course1_ 
+            on enrolmentl0_.c_course_id=course1_.c_id 
+    where
+        enrolmentl0_.c_student_id=?
+2022-09-30 15:35:43.524 ERROR 25248 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:774) ~[spring-boot-2.7.3.jar:2.7.3]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:755) ~[spring-boot-2.7.3.jar:2.7.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315) ~[spring-boot-2.7.3.jar:2.7.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-2.7.3.jar:2.7.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-2.7.3.jar:2.7.3]
+	at org.msx.software.edu.system.Application.main(Application.java:27) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.7.3.jar:2.7.3]
+Caused by: org.springframework.orm.jpa.JpaSystemException: null id generated for:class org.msx.software.edu.system.model.entity.Enrolment; nested exception is org.hibernate.id.IdentifierGenerationException: null id generated for:class org.msx.software.edu.system.model.entity.Enrolment
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:331) ~[spring-orm-5.3.22.jar:5.3.22]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:233) ~[spring-orm-5.3.22.jar:5.3.22]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566) ~[spring-orm-5.3.22.jar:5.3.22]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:743) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:711) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:654) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:407) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.22.jar:5.3.22]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-5.3.22.jar:5.3.22]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.22.jar:5.3.22]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:174) ~[spring-data-jpa-2.7.2.jar:2.7.2]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.22.jar:5.3.22]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-5.3.22.jar:5.3.22]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.22.jar:5.3.22]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215) ~[spring-aop-5.3.22.jar:5.3.22]
+	at jdk.proxy3/jdk.proxy3.$Proxy133.save(Unknown Source) ~[na:na]
+	at org.msx.software.edu.system.Application.lambda$commandLineRunner$3(Application.java:87) ~[classes/:na]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:771) ~[spring-boot-2.7.3.jar:2.7.3]
+	... 8 common frames omitted
+Caused by: org.hibernate.id.IdentifierGenerationException: null id generated for:class org.msx.software.edu.system.model.entity.Enrolment
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:117) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:185) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:128) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:118) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.internal.SessionImpl.persistOnFlush(SessionImpl.java:801) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.spi.CascadingActions$8.cascade(CascadingActions.java:341) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeToOne(Cascade.java:510) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:434) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:220) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeCollectionElements(Cascade.java:543) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeCollection(Cascade.java:474) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:437) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:220) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:153) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.cascadeOnFlush(AbstractFlushingEventListener.java:159) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:149) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:82) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:39) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:107) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1407) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:489) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3290) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2425) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:449) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:183) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$300(JdbcResourceLocalTransactionCoordinatorImpl.java:40) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:281) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101) ~[hibernate-core-5.6.10.Final.jar:5.6.10.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562) ~[spring-orm-5.3.22.jar:5.3.22]
+	... 24 common frames omitted
+
+2022-09-30 15:35:43.566 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_book cascade constraints
+2022-09-30 15:35:43.591 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_course cascade constraints
+2022-09-30 15:35:43.623 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_enrolment cascade constraints
+2022-09-30 15:35:43.654 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_student cascade constraints
+2022-09-30 15:35:43.702 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop table t_edu_student_id_card cascade constraints
+2022-09-30 15:35:43.741 DEBUG 25248 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    drop sequence master_entity_seq
+2022-09-30 15:35:43.750  INFO 25248 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-09-30 15:35:43.758  INFO 25248 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
