@@ -1,4 +1,4 @@
-package org.msx.software.edu.system.model.repository;
+package org.msx.software.edu.system.repository;
 
 import org.msx.software.edu.system.model.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;

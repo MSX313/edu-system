@@ -1,4 +1,4 @@
-package org.msx.software.edu.system.model.repository;
+package org.msx.software.edu.system.repository;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;

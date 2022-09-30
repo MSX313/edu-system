@@ -32,17 +32,58 @@
         <maven-plugin-api.version>3.8.6</maven-plugin-api.version>
         <asciidoctor-maven-plugin.version>2.2.2</asciidoctor-maven-plugin.version>
         <!-- other -->
+        <logback-core.version>1.4.1</logback-core.version>
+        <logback-classic.version>1.4.1</logback-classic.version>
         <logback-jackson.version>0.1.5</logback-jackson.version>
         <logback-json-classic.version>0.1.5</logback-json-classic.version>
         <json-simple.version>1.1.1</json-simple.version>
         <jcal.version>1.5</jcal.version>
         <javafaker.version>1.0.2</javafaker.version>
         <joda-time.version>2.11.1</joda-time.version>
-
+        <slf4j-api.version>2.0.1</slf4j-api.version>
+        <jcl-over-slf4j.version>2.0.1</jcl-over-slf4j.version>
+        <logback-ext-spring.version>0.1.5</logback-ext-spring.version>
 
     </properties>
 
     <dependencies>
+
+        <!-- logback -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.clogr</groupId>
+            <artifactId>clogr-slf4j1-adapter</artifactId>
+            <version>0.8.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${jcl-over-slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-spring</artifactId>
+            <version>${logback-ext-spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
@@ -61,8 +102,6 @@
             <artifactId>logback-jackson</artifactId>
             <version>${logback-jackson.version}</version>
         </dependency>
-
-
 
         <dependency>
             <groupId>com.github.sbahmani</groupId>
@@ -133,11 +172,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jersey</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
         </dependency>
 
         <dependency>
@@ -309,36 +343,31 @@
             <version>${asciidoctor-maven-plugin.version}</version>
         </dependency>
 
-        <!--
-              <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-data-mongodb</artifactId>
-                </dependency>
-        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
 
-        <!--
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-security</artifactId>
-                </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
-                <dependency>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-test</artifactId>
-                    <scope>test</scope>
-                </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-                <dependency>
-                    <groupId>org.thymeleaf.extras</groupId>
-                    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-                </dependency>
-        -->
-        <!--
-                <dependency>
-                     <groupId>org.springframework.boot</groupId>
-                     <artifactId>spring-boot-starter-thymeleaf</artifactId>
-                </dependency>
-        -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
     </dependencies>
 
