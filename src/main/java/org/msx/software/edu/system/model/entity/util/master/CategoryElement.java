@@ -20,11 +20,12 @@ public class CategoryElement extends BaseEntity {
     private String code;
     @Column(name = FieldName.VALUE, nullable = false)
     private String value;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(
+            targetEntity = Category.class,
+            fetch = FetchType.LAZY)
     @JoinColumn(
             name = FieldName.CATEGORY,
             referencedColumnName = FieldName.ID,
-            foreignKey = @ForeignKey(name = FieldName.CATEGORY_CATEGORY_ELEMENT_ID_FOREIGN_KEY),
-            nullable = false)
+            foreignKey = @ForeignKey(name = FieldName.CATEGORY_CATEGORY_ELEMENT_ID_FOREIGN_KEY))
     private Category category;
 }

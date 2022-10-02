@@ -21,7 +21,8 @@ public class Category extends BaseEntity {
     private String code;
     @Column(name = FieldName.VALUE, nullable = false)
     private String value;
-    @OneToMany(mappedBy = EntityName.CATEGORY,
+    @OneToMany(
+            mappedBy = EntityName.CATEGORY,
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             targetEntity = CategoryElement.class,
