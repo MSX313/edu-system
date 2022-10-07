@@ -13,11 +13,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserFinderImpl implements UserFinder {
 
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
     @Override
     public UserEntity findById(Long id) {
-        Optional<UserEntity> user = repository.findById(id);
+        Optional<UserEntity> user = userRepository.findById(id);
         if (user.isPresent()) {
             return user.get();
         } else {
@@ -28,7 +28,7 @@ public class UserFinderImpl implements UserFinder {
 
     @Override
     public UserEntity findByUsername(String username) {
-        Optional<UserEntity> user = repository.findByUserName(username);
+        Optional<UserEntity> user = userRepository.findByUserName(username);
         if (user.isPresent()) {
             return user.get();
         } else {

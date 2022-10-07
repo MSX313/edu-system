@@ -1,7 +1,7 @@
 package org.msx.software.edu.system.controller.mapper.util;
 
 
-import org.msx.software.edu.system.controller.vm.CategoryElementVm;
+import org.msx.software.edu.system.controller.vm.util.CategoryElementVm;
 import org.msx.software.edu.system.business.common.codes.MessageCodes;
 
 import javax.inject.Named;

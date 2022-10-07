@@ -1,4 +1,4 @@
-package org.msx.software.edu.system.controller.vm;
+package org.msx.software.edu.system.controller.vm.util;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 
 @ApiModel(description = "اطلاعات کتگوری ها (ثابت ها) ی موجود در سیستم")
-public class CategoryElementVm extends BaseViewModel {
+public class CategoryElementVm extends BaseEntityVm {
 
     @ApiModelProperty(notes = "کد کتگوری")
     private String code;

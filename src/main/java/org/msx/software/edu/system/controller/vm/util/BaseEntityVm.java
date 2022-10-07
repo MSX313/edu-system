@@ -1,4 +1,4 @@
-package org.msx.software.edu.system.controller.vm;
+package org.msx.software.edu.system.controller.vm.util;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @EqualsAndHashCode(callSuper = true)
 
 @ApiModel(description = "فیلدهای اطلاعاتی عمومی مربوط به داده هایی که در دیتابیس ذخیره شده اند")
-public class BaseViewModel extends MasterVm {
+public class BaseEntityVm extends MasterVm {
 
     @ApiModelProperty(notes = "شناسه رکورد دیتا")
     private Long id;
@@ -41,7 +41,7 @@ public class BaseViewModel extends MasterVm {
     @ApiModelProperty(notes = "نسخه داده ثبت شده در دیتابیس که نمایانگر تعداد دفعات ویرایش رکورد دیتا در دیتابیس می باشد")
     private Integer version;
 
-    public BaseViewModel() {
-        super(BaseViewModel.class);
+    public BaseEntityVm() {
+        super(BaseEntityVm.class);
     }
 }

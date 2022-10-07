@@ -1,4 +1,4 @@
-package org.msx.software.edu.system.controller.vm;
+package org.msx.software.edu.system.controller.vm.util;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.msx.software.edu.system.business.util.Hashable;

@@ -2,7 +2,7 @@ package org.msx.software.edu.system.controller.mapper;
 
 import org.msx.software.edu.system.model.entity.CategoryElement;
 import org.msx.software.edu.system.model.entity.UserEntity;
-import org.msx.software.edu.system.controller.vm.CategoryElementVm;
+import org.msx.software.edu.system.controller.vm.util.CategoryElementVm;
 import org.msx.software.edu.system.business.operation.EntityFinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,9 +17,9 @@ public class CategoryElementMapper extends BaseMapper<CategoryElement, CategoryE
     }
 
     @Override
-    public void map(CategoryElement from, CategoryElementVm to) {
-        super.map(from, to);
-        to.setCode(from.getCode());
-        to.setValue(from.getValue());
+    public void map(CategoryElement categoryElement, CategoryElementVm categoryElementVm) {
+        super.map(categoryElement, categoryElementVm);
+        categoryElementVm.setCode(categoryElement.getCode());
+        categoryElementVm.setValue(categoryElement.getValue());
     }
 }

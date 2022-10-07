@@ -1,10 +1,10 @@
 package org.msx.software.edu.system.controller.mapper;
 
-import lombok.AllArgsConstructor;
-import org.msx.software.edu.system.model.entity.util.Entity;
-import org.msx.software.edu.system.model.entity.UserEntity;
-import org.msx.software.edu.system.controller.vm.BaseViewModel;
+import lombok.RequiredArgsConstructor;
 import org.msx.software.edu.system.business.operation.EntityFinder;
+import org.msx.software.edu.system.controller.vm.util.BaseEntityVm;
+import org.msx.software.edu.system.model.entity.UserEntity;
+import org.msx.software.edu.system.model.entity.util.Entity;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -17,38 +17,38 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-@AllArgsConstructor
-public class BaseMapper<E extends Entity, V extends BaseViewModel> implements Mapper<E, V> {
+@RequiredArgsConstructor
+public class BaseMapper<ENTITY extends Entity, ViewModel extends BaseEntityVm> implements Mapper<ENTITY, ViewModel> {
 
     private final static String UNKNOWN = "نا مشخص";
     @Qualifier("userFinderImpl")
     private final EntityFinder<UserEntity> userFinder;
 
     @Override
-    public void map(E from, V to) {
-        to.setId(from.getId());
-        to.setInsertUser(from.getInsertUser());
-        to.setUpdateUser(from.getUpdateUser());
-        to.setInsertDateTime(from.getInsertDateTime());
-        to.setUpdateDateTime(from.getUpdateDateTime());
-        to.setIsActive(from.isActive());
-        to.setVersion(from.getVersion());
+    public void map(ENTITY baseEntity, ViewModel baseEntityVm) {
+        baseEntityVm.setId(baseEntity.getId());
+        baseEntityVm.setInsertUser(baseEntity.getInsertUser());
+        baseEntityVm.setUpdateUser(baseEntity.getUpdateUser());
+        baseEntityVm.setInsertDateTime(baseEntity.getInsertDateTime());
+        baseEntityVm.setUpdateDateTime(baseEntity.getUpdateDateTime());
+        baseEntityVm.setIsActive(baseEntity.isActive());
+        baseEntityVm.setVersion(baseEntity.getVersion());
         try {
-            setInsertingUserFullName(from, to);
-            setUpdatingUserFullName(from, to);
+            setInsertingUserFullName(baseEntity, baseEntityVm);
+            setUpdatingUserFullName(baseEntity, baseEntityVm);
         } catch (Exception ex) {
-            to.setInsertUserFullName(UNKNOWN);
-            to.setUpdateUserFullName(UNKNOWN);
+            baseEntityVm.setInsertUserFullName(UNKNOWN);
+            baseEntityVm.setUpdateUserFullName(UNKNOWN);
         }
     }
 
     @Override
-    public List<V> map(List<E> source, Class<? extends V> clazz) {
-        List<V> result = new ArrayList<>();
+    public List<ViewModel> map(List<ENTITY> source, Class<? extends ViewModel> clazz) {
+        List<ViewModel> result = new ArrayList<>();
         if (source != null) {
-            for (E from : source) {
+            for (ENTITY from : source) {
                 try {
-                    V to = clazz.newInstance();
+                    ViewModel to = clazz.newInstance();
                     map(from, to);
                     result.add(to);
                 } catch (InstantiationException | IllegalAccessException e) {
@@ -61,12 +61,12 @@ public class BaseMapper<E extends Entity, V extends BaseViewModel> implements Ma
     }
 
     @Override
-    public Set<V> map(Set<E> source, Class<? extends V> clazz) {
-        Set<V> result = new HashSet<>();
+    public Set<ViewModel> map(Set<ENTITY> source, Class<? extends ViewModel> clazz) {
+        Set<ViewModel> result = new HashSet<>();
         if (source != null) {
-            for (E from : source) {
+            for (ENTITY from : source) {
                 try {
-                    V to = clazz.newInstance();
+                    ViewModel to = clazz.newInstance();
                     map(from, to);
                     result.add(to);
                 } catch (InstantiationException | IllegalAccessException e) {
@@ -79,12 +79,12 @@ public class BaseMapper<E extends Entity, V extends BaseViewModel> implements Ma
     }
 
     @Override
-    public Page<V> map(Page<E> source, Class<? extends V> clazz) {
-        List<V> result = new ArrayList<>();
+    public Page<ViewModel> map(Page<ENTITY> source, Class<? extends ViewModel> clazz) {
+        List<ViewModel> result = new ArrayList<>();
         if (source != null) {
-            for (E from : source.getContent()) {
+            for (ENTITY from : source.getContent()) {
                 try {
-                    V to = clazz.newInstance();
+                    ViewModel to = clazz.newInstance();
                     map(from, to);
                     result.add(to);
                 } catch (InstantiationException | IllegalAccessException e) {
@@ -92,21 +92,25 @@ public class BaseMapper<E extends Entity, V extends BaseViewModel> implements Ma
                     throw new RuntimeException(e.getMessage());
                 }
             }
-            return new PageImpl<V>(result, source.getPageable(), source.getTotalElements());
+            return new PageImpl<>(result, source.getPageable(), source.getTotalElements());
         } else {
             return Page.empty(Pageable.unpaged());
         }
     }
 
-    private void setInsertingUserFullName(E from, V to) {
+    private void setInsertingUserFullName(ENTITY baseEntity, ViewModel baseEntityVm) {
         UserEntity insertingUser =
-                userFinder.findById(Long.valueOf(from.getInsertUser()));
-        to.setInsertUserFullName(String.format("%s %s", insertingUser.getFirstName(), insertingUser.getLastName()));
+                userFinder.findById(Long.valueOf(baseEntity.getInsertUser()));
+        baseEntityVm.setInsertUserFullName(
+                String.format("%s %s",
+                        insertingUser.getFirstName(), insertingUser.getLastName()));
     }
 
-    private void setUpdatingUserFullName(E from, V to) {
+    private void setUpdatingUserFullName(ENTITY baseEntity, ViewModel to) {
         UserEntity updatingUser =
-                userFinder.findById(Long.valueOf(from.getUpdateUser()));
-        to.setUpdateUserFullName(String.format("%s %s", updatingUser.getFirstName(), updatingUser.getLastName()));
+                userFinder.findById(Long.valueOf(baseEntity.getUpdateUser()));
+        to.setUpdateUserFullName(
+                String.format("%s %s",
+                        updatingUser.getFirstName(), updatingUser.getLastName()));
     }
 }

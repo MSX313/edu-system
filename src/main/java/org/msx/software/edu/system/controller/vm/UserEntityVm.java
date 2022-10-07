@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.msx.software.edu.system.controller.vm.util.BaseEntityVm;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 
 @ApiModel(description = "اطلاعات کاربر سیستم")
-public class UserViewModel extends BaseViewModel {
+public class UserEntityVm extends BaseEntityVm {
 
     @ApiModelProperty(notes = "نام کاربری")
     private String username;

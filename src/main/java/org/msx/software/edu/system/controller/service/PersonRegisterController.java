@@ -5,7 +5,7 @@
 //import org.msx.software.edu.system.common.enums.EDUCurrencyType;
 //import org.msx.software.edu.system.common.enums.EDUGenderType;
 //import org.msx.software.edu.system.mapper.util.CategoryElementMapper;
-//import org.msx.software.edu.system.controller.vm.CategoryElementVm;
+//import org.msx.software.edu.system.controller.vm.util.CategoryElementVm;
 //import org.springframework.web.bind.annotation.*;
 //
 //import java.util.List;
