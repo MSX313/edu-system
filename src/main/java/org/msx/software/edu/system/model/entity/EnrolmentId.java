@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.msx.software.edu.system.model.entity.util.codes.ColumnDefinitionType;
 import org.msx.software.edu.system.model.entity.util.codes.FieldName;
-import org.msx.software.edu.system.util.Hashable;
+import org.msx.software.edu.system.business.util.Hashable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

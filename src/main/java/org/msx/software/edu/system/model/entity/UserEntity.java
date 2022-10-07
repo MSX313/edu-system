@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.msx.software.edu.system.model.entity.util.BaseEntity;
 import org.msx.software.edu.system.model.entity.util.codes.*;
-import org.msx.software.edu.system.util.codes.ExceptionMessageCode;
+import org.msx.software.edu.system.business.common.codes.ExceptionMessageCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
