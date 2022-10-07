@@ -45,6 +45,7 @@
         <slf4j-api.version>2.0.1</slf4j-api.version>
         <jcl-over-slf4j.version>2.0.1</jcl-over-slf4j.version>
         <logback-ext-spring.version>0.1.5</logback-ext-spring.version>
+        <clogr-slf4j1-adapter.version>0.8.2</clogr-slf4j1-adapter.version>
 
     </properties>
 
@@ -72,7 +73,7 @@
         <dependency>
             <groupId>io.clogr</groupId>
             <artifactId>clogr-slf4j1-adapter</artifactId>
-            <version>0.8.2</version>
+            <version>${clogr-slf4j1-adapter.version}</version>
         </dependency>
 
         <dependency>
@@ -434,16 +435,6 @@
                 <version>${maven-jar-plugin.version}</version>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>16</source>
-                    <target>16</target>
-                </configuration>
-            </plugin>
-
             <!--  Source  -->
 
             <plugin>
@@ -479,6 +470,31 @@
                 <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
                     <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>testCompile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
                 </configuration>
             </plugin>
 

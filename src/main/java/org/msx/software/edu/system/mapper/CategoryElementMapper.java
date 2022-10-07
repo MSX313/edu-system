@@ -1,7 +1,7 @@
 package org.msx.software.edu.system.mapper;
 
-import org.msx.software.edu.system.model.entity.util.master.CategoryElement;
-import org.msx.software.edu.system.model.entity.util.master.UserEntity;
+import org.msx.software.edu.system.model.entity.CategoryElement;
+import org.msx.software.edu.system.model.entity.UserEntity;
 import org.msx.software.edu.system.model.view.util.CategoryElementVm;
 import org.msx.software.edu.system.service.EntityFinder;
 import org.springframework.beans.factory.annotation.Autowired;

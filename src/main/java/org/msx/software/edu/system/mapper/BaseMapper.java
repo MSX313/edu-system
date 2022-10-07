@@ -1,8 +1,8 @@
 package org.msx.software.edu.system.mapper;
 
 import lombok.AllArgsConstructor;
-import org.msx.software.edu.system.model.entity.util.master.Entity;
-import org.msx.software.edu.system.model.entity.util.master.UserEntity;
+import org.msx.software.edu.system.model.entity.util.Entity;
+import org.msx.software.edu.system.model.entity.UserEntity;
 import org.msx.software.edu.system.model.view.util.BaseViewModel;
 import org.msx.software.edu.system.service.EntityFinder;
 import org.springframework.beans.factory.annotation.Qualifier;

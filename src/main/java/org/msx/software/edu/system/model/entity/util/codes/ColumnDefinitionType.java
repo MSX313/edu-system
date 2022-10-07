@@ -4,6 +4,7 @@ public interface ColumnDefinitionType {
 
     String NUMBER = "NUMBER";
     String VARCHAR_2_50 = "VARCHAR2(50)";
+    String VARCHAR_2_25 = "VARCHAR2(25)";
     String VARCHAR_2_15 = "VARCHAR2(15)";
     String VARCHAR_2_1000_WITH_DEFAULT_VALUE = "VARCHAR2(1000) DEFAULT 'Default Value For Description'";
     String INTEGER = "INTEGER";

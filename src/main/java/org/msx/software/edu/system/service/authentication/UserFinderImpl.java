@@ -1,16 +1,16 @@
 package org.msx.software.edu.system.service.authentication;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.msx.software.edu.system.exception.DataNotFoundException;
-import org.msx.software.edu.system.model.entity.util.master.UserEntity;
-import org.msx.software.edu.system.repository.util.master.UserRepository;
+import org.msx.software.edu.system.model.entity.UserEntity;
+import org.msx.software.edu.system.repository.UserRepository;
 import org.msx.software.edu.system.util.codes.ExceptionMessageCode;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserFinderImpl implements UserFinder {
 
     private final UserRepository repository;
@@ -21,9 +21,8 @@ public class UserFinderImpl implements UserFinder {
         if (user.isPresent()) {
             return user.get();
         } else {
-            throw new DataNotFoundException(
-                    ExceptionMessageCode.USERNAME_NOT_FOUND_WITH_ID, id
-            );
+            throw new DataNotFoundException(ExceptionMessageCode.
+                    USERNAME_NOT_FOUND_WITH_ID, id);
         }
     }
 
@@ -33,9 +32,8 @@ public class UserFinderImpl implements UserFinder {
         if (user.isPresent()) {
             return user.get();
         } else {
-            throw new DataNotFoundException(
-                    ExceptionMessageCode.USERNAME_NOT_FOUND_WITH_USERNAME, username
-            );
+            throw new DataNotFoundException(ExceptionMessageCode.
+                    USERNAME_NOT_FOUND_WITH_USERNAME, username);
         }
     }
 }

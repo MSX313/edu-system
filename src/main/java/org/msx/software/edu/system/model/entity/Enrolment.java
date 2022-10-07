@@ -1,7 +1,7 @@
 package org.msx.software.edu.system.model.entity;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.msx.software.edu.system.model.entity.util.codes.ColumnDefinitionType;
 import org.msx.software.edu.system.model.entity.util.codes.EntityName;
@@ -15,7 +15,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 
@@ -23,59 +23,44 @@ import java.sql.Timestamp;
 @Table(name = TableName.ENROLMENT)
 public class Enrolment {
 
-    /* 1 */
     @EmbeddedId
     private EnrolmentId enrolmentId;
-    /* 2 */
-    @ManyToOne
-    @MapsId(value = FieldName.STUDENT_ID)
-    @JoinColumn(
-            name = FieldName.STUDENT_ID,
-            referencedColumnName = FieldName.ID,
-            foreignKey = @ForeignKey(name = FieldName.STUDENT_ENROLMENT_ID_FOREIGN_KEY)
-    )
-    private Student student;
-    /* 3 */
-    @ManyToOne
-    @MapsId(value = FieldName.COURSE_ID)
-    @JoinColumn(
-            name = FieldName.COURSE_ID,
-            referencedColumnName = FieldName.ID,
-            foreignKey = @ForeignKey(name = FieldName.COURSE_ID_FOREIGN_KEY))
+
+    @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
+    @MapsId(value = FieldName.USER)
+    @JoinColumn(name = FieldName.USER, referencedColumnName = FieldName.ID,
+            foreignKey = @ForeignKey(name = FieldName.USER_ENTITY_ENROLMENT_ID_FOREIGN_KEY))
+    private UserEntity userEntity;
+
+    @ManyToOne(targetEntity = Course.class, fetch = FetchType.LAZY)
+    @MapsId(value = FieldName.COURSE)
+    @JoinColumn(name = FieldName.COURSE, referencedColumnName = FieldName.ID,
+            foreignKey = @ForeignKey(name = FieldName.COURSE_ENROLMENT_ID_FOREIGN_KEY))
     private Course course;
-    /* 4 */
+
     @Column(name = FieldName.CREATED_AT, columnDefinition = ColumnDefinitionType.TIME_STAMP)
     private Timestamp createdAt;
-    /* 5 */
+
     @CreatedBy
     @Column(name = FieldName.INSERT_USER, columnDefinition = ColumnDefinitionType.VARCHAR_2_50)
     private String insertUser;
-    /* 6 */
+
     @LastModifiedBy
     @Column(name = FieldName.UPDATE_USER, columnDefinition = ColumnDefinitionType.VARCHAR_2_50)
     private String updateUser;
-    /* 7 */
+
     @CreatedDate
-    /*@CreationTimestamp*/
     @Column(name = FieldName.INSERT_DATE_TIME)
     private Timestamp insertDateTime;
-    /* 8 */
+
     @LastModifiedDate
-    /*@UpdateTimestamp*/
     @Column(name = FieldName.UPDATE_DATE_TIME)
     private Timestamp updateDateTime;
-    /* 9 */
+
     @Version
     @Column(name = FieldName.VERSION)
     private Integer version;
-    /* 10 */
-    @Column(name = FieldName.IS_ACTIVE, nullable = false)
-    private boolean activeState = true;
 
-    public Enrolment(EnrolmentId enrolmentId, Student student, Course course, Timestamp createdAt) {
-        this.enrolmentId = enrolmentId;
-        this.student = student;
-        this.course = course;
-        this.createdAt = createdAt;
-    }
+    @Column(name = FieldName.IS_ACTIVE, nullable = false)
+    private boolean isActive = Boolean.TRUE;
 }

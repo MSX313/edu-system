@@ -1,43 +1,35 @@
 package org.msx.software.edu.system.model.entity;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.msx.software.edu.system.model.entity.util.master.BaseEntity;
+import org.msx.software.edu.system.model.entity.util.BaseEntity;
 import org.msx.software.edu.system.model.entity.util.codes.ColumnDefinitionType;
 import org.msx.software.edu.system.model.entity.util.codes.EntityName;
 import org.msx.software.edu.system.model.entity.util.codes.FieldName;
 import org.msx.software.edu.system.model.entity.util.codes.TableName;
 
-import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
+
 @Setter
 
 @Entity(name = EntityName.BOOK)
 @Table(name = TableName.BOOK)
-public class Book  extends BaseEntity {
+public class Book extends BaseEntity {
 
-    /* 1 */
-    @Column(name = FieldName.NAME, nullable = false)
+    @Column(name = FieldName.NAME, columnDefinition = ColumnDefinitionType.VARCHAR_2_50, nullable = false)
     private String name;
-    /* 2 */
-    @Column(name = FieldName.CREATED_AT, columnDefinition = ColumnDefinitionType.TIME_STAMP)
-    private Timestamp createdAt;
-    /* 3 */
-    @ManyToOne
-    @JoinColumn(
-            name = FieldName.STUDENT_ID,
-            referencedColumnName = FieldName.ID,
-            foreignKey = @ForeignKey(name = FieldName.STUDENT_BOOK_ID_FOREIGN_KEY),
-            nullable = false)
-    private Student student;
 
-    public Book(String name, Timestamp createdAt) {
-        this.name = name;
-        this.createdAt = createdAt;
-    }
+    @Column(name = FieldName.CREATED_AT, columnDefinition = ColumnDefinitionType.TIME_STAMP, nullable = false)
+    private Timestamp createdAt;
+
+    @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = FieldName.USER, referencedColumnName = FieldName.ID,
+            foreignKey = @ForeignKey(name = FieldName.USER_ENTITY_BOOK_ID_FOREIGN_KEY))
+    private UserEntity userEntity;
 }
