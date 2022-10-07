@@ -5,8 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.msx.software.edu.system.model.entity.util.BaseEntity;
 import org.msx.software.edu.system.model.entity.util.codes.*;
+import org.msx.software.edu.system.util.codes.ExceptionMessageCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Period;
@@ -33,18 +35,23 @@ public class UserEntity extends BaseEntity {
     @JoinColumn(nullable = false)
     private UserEntityIdCard userEntityIdCard;
 
+    @NotNull(message = ExceptionMessageCode.USER_ENTITY_CODE_CAN_NOT_BE_NULL)
     @Column(name = FieldName.CODE, columnDefinition = ColumnDefinitionType.VARCHAR_2_50, nullable = false)
     private String code;
 
+    @Size(min = 10, max = 50, message = ExceptionMessageCode
+            .USER_ENTITY_USER_NAME_CAN_NOT_BE_LESS_THAN_TEN_AND_OVER_THAN_FIFTY_CHARACTERS)
     @Column(name = FieldName.USER_NAME, columnDefinition = ColumnDefinitionType.VARCHAR_2_50, nullable = false)
     private String userName;
 
     @Column(name = FieldName.PASSWORD, columnDefinition = ColumnDefinitionType.VARCHAR_2_50, nullable = false)
     private String password;
 
+    @Min(value = 10, message = ExceptionMessageCode.USER_ENTITY_FIRST_NAME_CAN_NOT_BE_LESS_THAN_TEN_CHARACTERS)
     @Column(name = FieldName.FIRST_NAME, columnDefinition = ColumnDefinitionType.VARCHAR_2_50, nullable = false)
     private String firstName;
 
+    @Max(value = 50, message = ExceptionMessageCode.USER_ENTITY_LAST_NAME_CAN_NOT_BE_OVER_THAN_FIFTY_CHARACTERS)
     @Column(name = FieldName.LAST_NAME, columnDefinition = ColumnDefinitionType.VARCHAR_2_50, nullable = false)
     private String lastName;
 
@@ -54,6 +61,7 @@ public class UserEntity extends BaseEntity {
     @Column(name = FieldName.DATE_OF_BIRTH, columnDefinition = ColumnDefinitionType.TIME_STAMP, nullable = false)
     private Timestamp dateOfBirth;
 
+    @Email(message = ExceptionMessageCode.USER_ENTITY_EMAIL_HAS_NOT_A_VALID_FORMAT)
     @Column(name = FieldName.EMAIL)
     private String email;
 

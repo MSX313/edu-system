@@ -14,6 +14,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.AssertTrue;
 import java.sql.Timestamp;
 
 @RequiredArgsConstructor
@@ -52,6 +53,7 @@ public class BaseEntity implements Entity {
     @Column(name = FieldName.VERSION)
     private Integer version;
 
+    @AssertTrue
     @Column(name = FieldName.IS_ACTIVE, nullable = false)
     private boolean isActive = Boolean.TRUE;
 }

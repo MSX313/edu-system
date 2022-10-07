@@ -1,7 +1,7 @@
 package org.msx.software.edu.system.mapper.util;
 
 
-import org.msx.software.edu.system.model.view.util.CategoryElementVm;
+import org.msx.software.edu.system.model.view.CategoryElementVm;
 
 public abstract class CategoryElementVmMapper<T> {
 

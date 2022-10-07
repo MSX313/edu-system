@@ -42,7 +42,7 @@
         <jcal.version>1.5</jcal.version>
         <javafaker.version>1.0.2</javafaker.version>
         <joda-time.version>2.11.1</joda-time.version>
-        <slf4j-api.version>2.0.1</slf4j-api.version>
+        <slf4j-api.version>2.0.3</slf4j-api.version>
         <jcl-over-slf4j.version>2.0.1</jcl-over-slf4j.version>
         <logback-ext-spring.version>0.1.5</logback-ext-spring.version>
         <clogr-slf4j1-adapter.version>0.8.2</clogr-slf4j1-adapter.version>
@@ -50,6 +50,24 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.0</version>
+        </dependency>
 
         <dependency>
             <groupId>io.springfox</groupId>
