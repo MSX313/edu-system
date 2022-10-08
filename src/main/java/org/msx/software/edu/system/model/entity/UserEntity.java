@@ -3,9 +3,9 @@ package org.msx.software.edu.system.model.entity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.msx.software.edu.system.business.common.codes.ExceptionMessageCode;
 import org.msx.software.edu.system.model.entity.util.BaseEntity;
 import org.msx.software.edu.system.model.entity.util.codes.*;
-import org.msx.software.edu.system.business.common.codes.ExceptionMessageCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -26,7 +26,8 @@ import java.util.Set;
         uniqueConstraints =
                 {@UniqueConstraint(name = ConstraintName.EMAIL_UNIQUE, columnNames = FieldName.EMAIL),
                         @UniqueConstraint(name = ConstraintName.CODE_UNIQUE, columnNames = FieldName.CODE),
-                        @UniqueConstraint(name = ConstraintName.USER_NAME_UNIQUE, columnNames = FieldName.USER_NAME)})
+                        @UniqueConstraint(name = ConstraintName.USER_NAME_UNIQUE, columnNames = FieldName.USER_NAME)},
+        indexes = @Index(name = IndexName.CODE, columnList = FieldName.CODE))
 @SequenceGenerator(
         name = SequenceName.USER_ENTITY, sequenceName = SequenceName.USER_ENTITY, allocationSize = 1)
 public class UserEntity extends BaseEntity {

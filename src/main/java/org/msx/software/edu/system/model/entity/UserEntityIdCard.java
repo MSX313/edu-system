@@ -25,6 +25,6 @@ public class UserEntityIdCard extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = FieldName.USER, referencedColumnName = FieldName.ID,
-            foreignKey = @ForeignKey(name = FieldName.USER_ENTITY_USER_ENTITY_CARD_ID_FOREIGN_KEY), nullable = false)
+            foreignKey = @ForeignKey(name = FieldName.USER_ENTITY_FOREIGN_KEY), nullable = false)
     private UserEntity userEntity;
 }

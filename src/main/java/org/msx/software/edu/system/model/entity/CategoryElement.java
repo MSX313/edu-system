@@ -9,7 +9,6 @@ import org.msx.software.edu.system.model.entity.util.codes.EntityName;
 import org.msx.software.edu.system.model.entity.util.codes.FieldName;
 import org.msx.software.edu.system.model.entity.util.codes.TableName;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
 
 @RequiredArgsConstructor
@@ -28,6 +27,6 @@ public class CategoryElement extends BaseEntity {
 
     @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
     @JoinColumn(name = FieldName.CATEGORY, referencedColumnName = FieldName.ID,
-            foreignKey = @ForeignKey(name = FieldName.CATEGORY_CATEGORY_ELEMENT_ID_FOREIGN_KEY))
+            foreignKey = @ForeignKey(name = FieldName.CATEGORY_FOREIGN_KEY), nullable = false)
     private Category category;
 }

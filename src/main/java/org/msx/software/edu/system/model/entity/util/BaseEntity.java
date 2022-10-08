@@ -3,7 +3,6 @@ package org.msx.software.edu.system.model.entity.util;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.msx.software.edu.system.model.entity.util.Entity;
 import org.msx.software.edu.system.model.entity.util.codes.ColumnDefinitionType;
 import org.msx.software.edu.system.model.entity.util.codes.FieldName;
 import org.msx.software.edu.system.model.entity.util.codes.SequenceName;

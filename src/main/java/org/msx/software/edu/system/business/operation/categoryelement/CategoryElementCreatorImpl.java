@@ -76,6 +76,7 @@ public class CategoryElementCreatorImpl implements CategoryElementCreator {
         }
         categoryElement.setCode(code);
         categoryElement.setValue(name);
+        categoryElement.setCategory(category);
         log.error(String.format(outputPrefix, code));
         if (categoryElement.getId() == null) {
             categoryElementList.add(categoryElement);

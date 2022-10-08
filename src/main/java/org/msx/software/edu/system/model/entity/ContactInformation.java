@@ -1,5 +1,6 @@
 package org.msx.software.edu.system.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -7,7 +8,6 @@ import org.msx.software.edu.system.model.entity.util.BaseEntity;
 import org.msx.software.edu.system.model.entity.util.codes.*;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 
 @RequiredArgsConstructor
 @Getter
@@ -28,6 +28,7 @@ public class ContactInformation extends BaseEntity {
 
     @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = FieldName.USER, referencedColumnName = FieldName.ID,
-            foreignKey = @ForeignKey(name = FieldName.USER_ENTITY_CONTACT_INFORMATION_ID_FOREIGN_KEY))
+            foreignKey = @ForeignKey(name = FieldName.USER_ENTITY_FOREIGN_KEY), nullable = false)
+    @JsonIgnore
     private UserEntity userEntity;
 }

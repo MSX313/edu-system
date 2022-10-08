@@ -22,6 +22,7 @@ public class BaseEntityVm extends MasterVm {
 
     @ApiModelProperty(notes = "نام کامل کاربری که دیتا را اضافه کرده")
     private String insertUserFullName;
+
     @ApiModelProperty(notes = "شناسه کاربری که آخرین ویرایش را بر روی دیتا انجام داده")
     private String updateUser;
 

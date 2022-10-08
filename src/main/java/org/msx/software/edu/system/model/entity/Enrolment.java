@@ -1,5 +1,6 @@
 package org.msx.software.edu.system.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -29,13 +30,15 @@ public class Enrolment {
     @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
     @MapsId(value = FieldName.USER)
     @JoinColumn(name = FieldName.USER, referencedColumnName = FieldName.ID,
-            foreignKey = @ForeignKey(name = FieldName.USER_ENTITY_ENROLMENT_ID_FOREIGN_KEY))
+            foreignKey = @ForeignKey(name = FieldName.USER_ENTITY_FOREIGN_KEY), nullable = false)
+    @JsonIgnore
     private UserEntity userEntity;
 
     @ManyToOne(targetEntity = Course.class, fetch = FetchType.LAZY)
     @MapsId(value = FieldName.COURSE)
     @JoinColumn(name = FieldName.COURSE, referencedColumnName = FieldName.ID,
-            foreignKey = @ForeignKey(name = FieldName.COURSE_ENROLMENT_ID_FOREIGN_KEY))
+            foreignKey = @ForeignKey(name = FieldName.COURSE_FOREIGN_KEY))
+    @JsonIgnore
     private Course course;
 
     @Column(name = FieldName.CREATED_AT, columnDefinition = ColumnDefinitionType.TIME_STAMP)

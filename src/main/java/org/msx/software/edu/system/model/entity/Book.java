@@ -1,5 +1,6 @@
 package org.msx.software.edu.system.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -9,7 +10,6 @@ import org.msx.software.edu.system.model.entity.util.codes.EntityName;
 import org.msx.software.edu.system.model.entity.util.codes.FieldName;
 import org.msx.software.edu.system.model.entity.util.codes.TableName;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -30,6 +30,7 @@ public class Book extends BaseEntity {
 
     @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = FieldName.USER, referencedColumnName = FieldName.ID,
-            foreignKey = @ForeignKey(name = FieldName.USER_ENTITY_BOOK_ID_FOREIGN_KEY))
+            foreignKey = @ForeignKey(name = FieldName.USER_ENTITY_FOREIGN_KEY))
+    @JsonIgnore
     private UserEntity userEntity;
 }
