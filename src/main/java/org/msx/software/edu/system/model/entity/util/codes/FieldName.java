@@ -37,6 +37,6 @@ public interface FieldName {
     String USER = "F_USER";
     String ROLE = "F_ROLE";
     String COURSE_FOREIGN_KEY = "C_COURSE_FK";
-    String CATEGORY_FOREIGN_KEY = "C_CTG_CTGE_ID_FK";
+    String CATEGORY_FOREIGN_KEY = "C_CATEGORY_FK";
     String USER_ENTITY_FOREIGN_KEY = "C_USER_ENTITY_FK";
 }

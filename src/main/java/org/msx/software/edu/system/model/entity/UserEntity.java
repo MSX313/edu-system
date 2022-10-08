@@ -23,11 +23,21 @@ import java.util.Set;
 
 @Entity(name = EntityName.USER)
 @Table(name = TableName.USER,
-        uniqueConstraints =
-                {@UniqueConstraint(name = ConstraintName.EMAIL_UNIQUE, columnNames = FieldName.EMAIL),
-                        @UniqueConstraint(name = ConstraintName.CODE_UNIQUE, columnNames = FieldName.CODE),
-                        @UniqueConstraint(name = ConstraintName.USER_NAME_UNIQUE, columnNames = FieldName.USER_NAME)},
-        indexes = @Index(name = IndexName.CODE, columnList = FieldName.CODE))
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = ConstraintName.EMAIL_UNIQUE,
+                        columnNames = FieldName.EMAIL),
+                @UniqueConstraint(
+                        name = ConstraintName.CODE_UNIQUE,
+                        columnNames = FieldName.CODE),
+                @UniqueConstraint(
+                        name = ConstraintName.FIRST_NAME_LAST_NAME_UNIQUE,
+                        columnNames = {FieldName.FIRST_NAME, FieldName.LAST_NAME}),
+                @UniqueConstraint(
+                        name = ConstraintName.USER_NAME_UNIQUE,
+                        columnNames = FieldName.USER_NAME)
+        },
+        indexes = @Index(name = IndexName.CODE, columnList = FieldName.CODE, unique = true))
 @SequenceGenerator(
         name = SequenceName.USER_ENTITY, sequenceName = SequenceName.USER_ENTITY, allocationSize = 1)
 public class UserEntity extends BaseEntity {

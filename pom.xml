@@ -22,6 +22,7 @@
         <!-- main -->
         <java.version>18</java.version>
         <spring-boot-maven-plugin.version>2.7.3</spring-boot-maven-plugin.version>
+        <spring-boot-configuration-processor.version>2.7.3</spring-boot-configuration-processor.version>
         <!-- maven -->
         <maven-plugin-annotations.version>3.6.4</maven-plugin-annotations.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
@@ -46,10 +47,37 @@
         <jcl-over-slf4j.version>2.0.1</jcl-over-slf4j.version>
         <logback-ext-spring.version>0.1.5</logback-ext-spring.version>
         <clogr-slf4j1-adapter.version>0.8.2</clogr-slf4j1-adapter.version>
+        <guava.version>31.1-jre</guava.version>
 
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
 
         <dependency>
             <groupId>javax.validation</groupId>
@@ -168,6 +196,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>${spring-boot-configuration-processor.version}</version>
         </dependency>
 
         <dependency>
@@ -425,13 +459,13 @@
                         </configuration>
                     </execution>
                 </executions>
-                <!--                <dependencies>
-                                    <dependency>
-                                        <groupId>org.springframework.restdocs</groupId>
-                                        <artifactId>spring-restdocs-asciidoctor</artifactId>
-                                        <version>${spring-restdocs.version}</version>
-                                    </dependency>
-                                </dependencies>-->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework.restdocs</groupId>
+                        <artifactId>spring-restdocs-asciidoctor</artifactId>
+                        <version>${spring-restdocs.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>
