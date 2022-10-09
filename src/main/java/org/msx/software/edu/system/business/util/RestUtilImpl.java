@@ -1,15 +1,17 @@
-﻿package org.msx.software.edu.system.business.util;
+package org.msx.software.edu.system.business.util;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;
 
+@Component
 public class RestUtilImpl implements RestUtil {
 
     @Override

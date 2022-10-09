@@ -1,4 +1,4 @@
-﻿package org.msx.software.edu.system.business.operation.authentication;
+package org.msx.software.edu.system.business.operation.authentication;
 
 import lombok.RequiredArgsConstructor;
 import org.msx.software.edu.system.business.common.codes.ExceptionMessageCode;

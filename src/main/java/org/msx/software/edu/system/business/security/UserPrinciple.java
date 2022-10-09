@@ -1,4 +1,4 @@
-﻿package org.msx.software.edu.system.business.security;
+package org.msx.software.edu.system.business.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

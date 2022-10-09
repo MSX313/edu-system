@@ -1,4 +1,4 @@
-﻿package org.msx.software.edu.system.business.security;
+package org.msx.software.edu.system.business.security;
 
 import lombok.AllArgsConstructor;
 import org.msx.software.edu.system.business.common.codes.ExceptionMessageCode;
