@@ -5,11 +5,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.msx.software.edu.system.business.dto.util.MasterDto;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @ApiModel(description = "نتیجه بررسی در دسترس بودن سرویس ها")
-public class HealthCheckResultDto {
+public class HealthCheckResultDto extends MasterDto {
 
     @ApiModelProperty(notes = "این مقدار مشخص میکند که آیا سرویس های هومت در دسترس میباشند یا خیر")
     private boolean serviceOk;

@@ -1,7 +1,7 @@
 package org.msx.software.edu.system.controller.mapper;
 
 
-import org.msx.software.edu.system.business.common.enums.EDUCourseType;
+import org.msx.software.edu.system.business.common.enums.category.EDUCourseType;
 import org.msx.software.edu.system.controller.mapper.util.CategoryElementVmMapper;
 
 class CourseTypeMapper extends CategoryElementVmMapper<EDUCourseType> {

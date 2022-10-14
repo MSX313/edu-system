@@ -9,7 +9,6 @@ import org.msx.software.edu.system.model.entity.util.codes.EntityName;
 import org.msx.software.edu.system.model.entity.util.codes.FieldName;
 import org.msx.software.edu.system.model.entity.util.codes.TableName;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package org.msx.software.edu.system.business.util;
+package org.msx.software.edu.system.controller.util;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,5 +7,5 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface IgnoreLogging {
+public @interface IgnoreResponseBinding {
 }

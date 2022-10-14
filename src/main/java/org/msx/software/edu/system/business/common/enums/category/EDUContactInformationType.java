@@ -1,5 +1,10 @@
-package org.msx.software.edu.system.business.common.enums;
+package org.msx.software.edu.system.business.common.enums.category;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
 public enum EDUContactInformationType {
 
     PHONE_NUMBER("PHONE_NUMBER", "شماره تلفن"),
@@ -10,17 +15,4 @@ public enum EDUContactInformationType {
 
     private final String code;
     private final String value;
-
-    EDUContactInformationType(String code, String value) {
-        this.code = code;
-        this.value = value;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getValue() {
-        return value;
-    }
 }

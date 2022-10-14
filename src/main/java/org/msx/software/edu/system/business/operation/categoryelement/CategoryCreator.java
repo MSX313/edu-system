@@ -1,7 +1,7 @@
 package org.msx.software.edu.system.business.operation.categoryelement;
 
 import lombok.RequiredArgsConstructor;
-import org.msx.software.edu.system.business.common.enums.*;
+import org.msx.software.edu.system.business.common.enums.category.*;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
