@@ -22,8 +22,8 @@ public class ContactInformation extends BaseEntity {
     @Column(name = FieldName.VALUE, columnDefinition = ColumnDefinitionType.VARCHAR_2_50, nullable = false)
     private String value;
 
-    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @JoinColumn(name = FieldName.CONTACT_INFORMATION_TYPE, nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = FieldName.TYPE, nullable = false)
     private CategoryElement type;
 
     @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)

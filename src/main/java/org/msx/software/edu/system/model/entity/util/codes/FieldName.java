@@ -26,10 +26,9 @@ public interface FieldName {
     String COST = "C_COST";
     String DESCRIPTION = "C_DESCRIPTION";
     String ROLE_SET = "roleSet";
-    String CONTACT_INFORMATION_TYPE = "C_CONTACT_INFORMATION_TYPE";
-    String CURRENCY_TYPE_COST = "C_CURRENCY_TYPE_COST";
-    String GENDER_TYPE = "C_GENDER_TYPE";
-    String TYPE = "C_TYPE";
+    String CURRENCY_TYPE_COST = "F_CURRENCY_TYPE_COST";
+    String GENDER_TYPE = "F_GENDER_TYPE";
+    String TYPE = "F_TYPE";
     String COURSE_ID = "C_COURSE_ID";
     String USER_ENTITY_ID = "C_USER_ENTITY_ID";
     String COURSE = "F_COURSE";

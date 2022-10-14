@@ -76,11 +76,11 @@ public class UserEntity extends BaseEntity {
     @Column(name = FieldName.EMAIL)
     private String email;
 
-    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = FieldName.GENDER_TYPE, nullable = false)
     private CategoryElement gender;
 
-    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = FieldName.TYPE, nullable = false)
     private CategoryElement type;
 

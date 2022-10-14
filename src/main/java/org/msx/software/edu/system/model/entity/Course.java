@@ -29,11 +29,11 @@ public class Course extends BaseEntity {
     @Column(name = FieldName.COST, columnDefinition = ColumnDefinitionType.VARCHAR_2_50, nullable = false)
     private String cost;
 
-    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = FieldName.CURRENCY_TYPE_COST, nullable = false)
     private CategoryElement currencyTypeCost;
 
-    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = FieldName.TYPE, nullable = false)
     private CategoryElement type;
 
